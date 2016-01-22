@@ -20,10 +20,6 @@ get_report <- function(path, query, token, by = NULL) {
         json_content <- fetch_by(path, query, by, token)
     else
         json_content <- get_data(path, query, token)
-    if (is.null(json_content$rows) || length(json_content$rows) == 0) {
-        message("No results were obtained.")
-        return(json_content$rows)
-    }
     res <- json_content$rows
     # Convert dates to POSIXct with timezone defined in the GA profile
     if (any(grepl("date", names(res), fixed = TRUE))) {
