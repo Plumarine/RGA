@@ -32,15 +32,12 @@ get_mcf <- function(profile.id = getOption("rga.profile.id"),
                     start.date = "7daysAgo", end.date = "yesterday",
                     metrics = "mcf:totalConversions", dimensions = NULL,
                     sort = NULL, filters = NULL, sampling.level = NULL,
-                    start.index = NULL, max.results = NULL, 
-					include.empty.rows = NULL, fetch.by = NULL, token) {
+                    start.index = NULL, max.results = NULL, fetch.by = NULL, token) {
     if (!is.null(sampling.level))
         sampling.level <- match.arg(sampling.level, c("DEFAULT", "FASTER", "HIGHER_PRECISION"))
-    if (!is.null(include.empty.rows))
-        include.empty.rows <- match.arg(include.empty.rows, c(TRUE, FALSE))
     query <- build_query(profile.id = profile.id, start.date = start.date, end.date = end.date,
                          metrics = metrics, dimensions = dimensions, sort = sort, filters = filters,
-                         sampling.level = sampling.level, include.empty.rows = tolower(include.empty.rows),
+                         sampling.level = sampling.level,
                          start.index = start.index, max.results = max.results)
     res <- get_report("data/mcf", query, token, fetch.by)
     return(res)
